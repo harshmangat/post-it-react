@@ -1,24 +1,29 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import './components/PostForm';
+import PostForm from './components/PostForm';
+import './components/PostIt.css';
+import PostCard from './components/PostCard';
 
-function App() {
+
+
+
+function App(props) {
+  const postObj = [
+    {
+      title: 'title will be shown here',
+      text: ' write some quote!',
+      url: 'https://images.unsplash.com/photo-1628626110189-f963f1ec6755?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=749&q=80',
+      category: 'books',
+    }
+  ]
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <PostForm />
+      <PostCard items={postObj}  />
     </div>
+    
+    
   );
 }
 
