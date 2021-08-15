@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./PostIt.css";
 
-const PostForm = () => {
+
+const PostForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredText, setEnteredText] = useState("");
   const [enteredUrl, setEnteredUrl] = useState("");
@@ -33,6 +34,7 @@ const PostForm = () => {
       category: enteredCategory,
     };
     console.log(postData);
+   props.newPost(postData);
     setEnteredTitle("");
     setEnteredText("");
     setEnteredUrl("");

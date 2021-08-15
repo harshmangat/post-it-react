@@ -98,6 +98,7 @@ input[type=url]{
   font-weight: 500;
   font-size: medium;
   cursor: pointer;
+  margin-top: 0.5rem;
 }
 
 /* header end */
@@ -138,10 +139,10 @@ input[type=url]{
 }
 
 .para{
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   display: flex;
   
-  margin-left: 25px;
+  margin-left: 2.1rem;
   display: inline-block;
   flex-wrap: wrap;
   width: 91%;
@@ -150,7 +151,7 @@ input[type=url]{
 .category{
   padding: 0.3rem;
   margin-top: 1rem;
-  margin-left: 1.5rem;
+  margin-left: 1.7rem;
   margin-bottom: 1rem;
   font-family: 'Montserrat';
   color: #2563EB;
@@ -168,7 +169,7 @@ input[type=url]{
 
 /* Media Query */
 
-@media screen and (max-width: 640px){
+@media screen and (max-width: 768px){
   body{
     align-content: center;
   }
@@ -176,7 +177,7 @@ input[type=url]{
   #header{
     overflow: hidden;
     width: 100vw;
-    height: 55vh;
+    height: 60vh;
   }
 
   .heading{
@@ -191,7 +192,7 @@ input[type=url]{
   #form{
     background-color: #EDEDED;
     width: 15rem;
-    height: 16.3rem;
+    height: 15.3rem;
     align-items: center;
     justify-content: center;
     margin: 0.5rem auto;
@@ -208,7 +209,8 @@ input[type=url]{
     border-radius: 6px;
     width: 6rem;
     position: relative;
-    margin-left: 1rem;
+    /* margin-left: 1rem; */
+    margin: auto;
     font-family: 'Montserrat';
     font-weight: 500;
     font-size: medium;
