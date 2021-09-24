@@ -26,7 +26,7 @@
 #form{
   background-color: #EDEDED;
   width: 40rem;
-  height: 16rem;
+  height: 16.4rem;
   align-items: center;
   justify-content: center;
   margin: 1rem auto;
@@ -176,8 +176,8 @@ input[type=url]{
   
   #header{
     overflow: hidden;
-    width: 100vw;
-    height: 60vh;
+    /* width: 100vw;
+    height: 60vh; */
   }
 
   .heading{
@@ -192,7 +192,7 @@ input[type=url]{
   #form{
     background-color: #EDEDED;
     width: 15rem;
-    height: 15.3rem;
+    height: 16.4rem;
     align-items: center;
     justify-content: center;
     margin: 0.5rem auto;
