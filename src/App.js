@@ -18,13 +18,17 @@ import useHttp from "./hooks/use-http";
 
 function App() {
   const [data, setData] = useState([]);
-  // const [tasks, setTasks] = useState([]);
 
   const { isLoading, error, sendRequest: fetchTasks } = useHttp();
 
+  const {
+    sendRequest: sendTaskRequest
+  } = useHttp(); /*new useHttp state call for send request */
+
+  /*<===GET request code=====> */
   useEffect(() => {
     const transformTasks = (data) => {
-      const loadedTasks = data.results.map((data) => ({
+      const loadedTasks = data.results.reverse().map((data) => ({
         id: data.objectId,
         text: data.description,
         title: data.title,
@@ -45,12 +49,48 @@ function App() {
       transformTasks
     );
   }, [fetchTasks]);
+  /* <===GET request code Ends===>  */
 
-  const addNewPostHandler = (postData) => {
-    setData((prevData) => {
-      return [postData, ...prevData];
-    });
+  // const addNewPostHandler = (postData) => {
+  //   setData((prevData) => {
+  //     return [postData, ...prevData];
+  //   });
+  // };
+
+  /*<== send POST request code ==>*/
+  const createTask = (data) => {
+    const generatedId = data.objectId;
+    const createdTask = {
+      id: generatedId,
+      text: data.description,
+      title: data.title,
+      url: data.image,
+      category: data.category
+    };
+
+    setData((prevTask) => [createdTask, ...prevTask]);
   };
+  const addNewPostHandler = async (data) => {
+    sendTaskRequest(
+      {
+        method: "post",
+        url: "https://peerup-web-dev-srv.herokuapp.com/parse/classes/PostIt",
+        headers: {
+          "X-Parse-Application-Id": "MVV6avFp",
+          "Content-Type": "application/json"
+        },
+        body: {
+          description: data.text,
+          title: data.title,
+          image: data.url,
+          category: data.category
+        }
+      },
+      createTask(data)
+    );
+  };
+  /*<== send request code ends ==>*/
+
   return (
     <div>
       <PostForm newPost={addNewPostHandler} />
