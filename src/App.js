@@ -49,7 +49,7 @@ function App() {
       transformTasks
     );
   }, [fetchTasks]);
-  /* <===GET request code Ends===>  */
+  /* ===GET request code Ends===  */
 
   // const addNewPostHandler = (postData) => {
   //   setData((prevData) => {
@@ -57,18 +57,12 @@ function App() {
   //   });
   // };
 
-  /*<== send POST request code ==>*/
+  /*== send POST request code ==*/
   const createTask = (data) => {
-    const generatedId = data.objectId;
-    const createdTask = {
-      id: generatedId,
-      text: data.description,
-      title: data.title,
-      url: data.image,
-      category: data.category
-    };
+    console.log("createTask", data);
+    data.id = data.objectId;
 
-    setData((prevTask) => [createdTask, ...prevTask]);
+    setData((prevTask) => [data, ...prevTask]);
   };
   const addNewPostHandler = async (data) => {
     sendTaskRequest(
@@ -86,10 +80,12 @@ function App() {
           category: data.category
         }
       },
-      createTask(data)
+      (responseData) => {
+        createTask({ ...data, ...responseData });
+      }
     );
   };
-  /*<== send request code ends ==>*/
+  /*== send request code ends ==*/
 
   return (
     <div>
