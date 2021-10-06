@@ -7,8 +7,6 @@ const PostForm = (props) => {
   const {
     register,
     handleSubmit,
-
-    formState: { errors },
   } = useForm();
 
   return (
