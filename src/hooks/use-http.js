@@ -1,36 +1,36 @@
-import { useCallback, useState } from "react";
+import { useState, useEffect } from "react";
+
+import axiosInstance from "../apis/axiosInstance";
 
 const useHttp = () => {
+  const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
 
-  const sendRequest = useCallback(async (requestConfig, applyData) => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      let response = await fetch(requestConfig.url, {
-        method: requestConfig.method ? requestConfig.method : "GET",
-        headers: requestConfig.headers ? requestConfig.headers : {},
-        body: requestConfig.body ? JSON.stringify(requestConfig.body) : null
-      });
+  const fetchData = async () => {
+    const response = await axiosInstance.get("/classes/PostIt", {
+      params: {
+        limit: 5,
+      },
+    });
+    setData(response.data.results);
+  };
 
-      if (!response.ok) {
-        throw new Error("Request failed");
-      }
-      const data = await response.json();
-      console.log(data);
-      applyData(data);
-    } catch (err) {
-      setError(err.message || "Something went wrong!");
-    }
-    setIsLoading(false);
+  useEffect(() => {
+    fetchData();
   }, []);
 
-  return {
-    isLoading,
-    error,
-    sendRequest
+  const postData = async (data) => {
+    setIsLoading(true);
+    const response = await axiosInstance.post("/classes/PostIt", data);
+    const newPostId = response.data.objectId;
+    const fetchNewPost = await axiosInstance.get(
+      `/classes/PostIt/${newPostId}`
+    );
+    setData((prevData) => [fetchNewPost.data, ...prevData]);
+    setIsLoading(false);
   };
+
+  return [data, postData, isLoading];
 };
 
 export default useHttp;

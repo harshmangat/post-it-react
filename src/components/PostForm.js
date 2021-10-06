@@ -1,84 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import "./PostIt.css";
 
+import { useForm } from "react-hook-form";
 
 const PostForm = (props) => {
-  const [enteredTitle, setEnteredTitle] = useState("");
-  const [enteredText, setEnteredText] = useState("");
-  const [enteredUrl, setEnteredUrl] = useState("");
-  const [enteredCategory, setEnteredCategory] = useState("");
+  const {
+    register,
+    handleSubmit,
 
-  const titleChangeHandler = (event) => {
-    setEnteredTitle(event.target.value);
-    // console.log(enteredTitle)
-  };
-  const textChangeHandler = (event) => {
-    setEnteredText(event.target.value);
-    // console.log(enteredText)
-  };
-  const urlChangeHandler = (event) => {
-    setEnteredUrl(event.target.value);
-    // console.log(enteredUrl)
-  };
-  const categoryChangeHandler = (event) => {
-    setEnteredCategory(event.target.value);
-    // console.log(enteredCategory)
-  };
-
-  const submitChangeHandler = (event) => {
-    event.preventDefault();
-    const postData = {
-      title: enteredTitle,
-      text: enteredText,
-      url: enteredUrl,
-      category: enteredCategory,
-    };
-    console.log(postData);
-   props.newPost(postData);
-    setEnteredTitle("");
-    setEnteredText("");
-    setEnteredUrl("");
-    setEnteredCategory("");
-  };
+    formState: { errors },
+  } = useForm();
 
   return (
     <header id="header">
       <h1 className="heading">POST IT</h1>
-      <form id="form" onSubmit={submitChangeHandler}>
-        <input
-          id="title"
-          value={enteredTitle}
-          type="text"
-          placeholder="Title"
-          required
-          onChange={titleChangeHandler}
-        />{" "}
-        <br />
+      <form id="form" onSubmit={handleSubmit((data) => props.onAddPost(data))}>
+        <input id="title" placeholder="Title" {...register("title")} /> <br />
         <textarea
           id="paragraph"
-          value={enteredText}
           cols="20"
           rows="3"
           placeholder="Enter Your Text"
           max="180"
-          required
-          onChange={textChangeHandler}
+          {...register("description")}
         ></textarea>{" "}
         <br />
         <input
           type="url"
-          value={enteredUrl}
           id="url"
           placeholder="Enter Image URL"
-          onChange={urlChangeHandler}
+          {...register("image")}
         />
         <input
           type="text"
-          value={enteredCategory}
           id="category"
           placeholder="Category"
-          required
-          onChange={categoryChangeHandler}
+          {...register("category")}
         />{" "}
         <br />
         <button id="post" type="submit">
