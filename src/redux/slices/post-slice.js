@@ -1,20 +1,22 @@
-import {createSlice} from '@reduxjs/toolkit';
-
-
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   posts: [],
-}
+};
 
 const postSlice = createSlice({
-  name: 'post',
+  name: "post",
   initialState,
-  reducers:{
-      UPDATE_POSTS(state, action) {
-        state.posts = action.payload;
-      }
-  }
-})
+  reducers: {
+    FETCH_POSTS(state, action) {
+      state.posts = action.payload;
+    },
+
+    ADD_POST(state, action) {
+      state.posts = action.payload;
+    },
+  },
+});
 
 export default postSlice;
 

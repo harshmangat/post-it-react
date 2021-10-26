@@ -7,7 +7,7 @@ import PostCard from "./components/PostCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
-import { fetchPost } from "./redux/thunks/post-thunk";
+import { fetchData } from "./redux/thunks/action";
 
 function App() {
  
@@ -15,7 +15,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchPost());
+    dispatch(fetchData());
   }, []);
 
   const { posts } = useSelector((state) => state.post);
